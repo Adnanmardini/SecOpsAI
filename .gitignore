@@ -216,3 +216,29 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+
+# SecOpsAI Project
+
+datasets/
+*.pcap
+
+# ML Artifacts
+*.pkl
+*.joblib
+*.pt
+mlruns/
+
+# Secrets
+*.pem
+*.key
+
+# IDE Files
+.vscode/
+.idea/
+
+# Project Logs
+audit.log
+security.log
+*.log
