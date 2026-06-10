@@ -1,0 +1,11 @@
+{
+  "baseline_type": "suricata_rules",
+  "rules_count": 12,
+  "scenarios": [
+    "c2_beaconing",
+    "dns_tunneling",
+    "lateral_movement",
+    "exfiltration"
+  ],
+  "status": "Ready for Day 2 Data Pipeline"
+}
