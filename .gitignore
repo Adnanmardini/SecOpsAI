@@ -1,0 +1,12 @@
+venv/
+.cache/
+.mozilla/
+.BurpSuite/
+VULN_BANK_DEVSECOP/
+__pycache__/
+*.pyc
+*.pcap
+*.joblib
+*.so
+*.tgz
+.env

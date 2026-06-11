@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0"
+      xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks"
+      xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info"
+>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-05-29_14_15_56.png" added="2026-05-29T18:16:01.664449Z" modified="2026-05-29T18:16:01.664453Z" visited="2026-05-29T18:16:01.664450Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-05-29T18:16:01.664452Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-05-29_14_17_06.png" added="2026-05-29T18:17:09.232798Z" modified="2026-05-29T18:17:09.232804Z" visited="2026-05-29T18:17:09.232799Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-05-29T18:17:09.232802Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-05-29_14_18_13.png" added="2026-05-29T18:18:16.432100Z" modified="2026-05-29T18:18:16.432113Z" visited="2026-05-29T18:18:16.432102Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-05-29T18:18:16.432109Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-05-29_14_39_54.png" added="2026-05-29T18:40:08.156149Z" modified="2026-05-29T18:40:08.156155Z" visited="2026-05-29T18:40:08.156150Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-05-29T18:40:08.156153Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-05-29_14_41_29.png" added="2026-05-29T18:41:31.294836Z" modified="2026-05-29T18:41:31.294841Z" visited="2026-05-29T18:41:31.294837Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-05-29T18:41:31.294839Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-05-29_14_42_05.png" added="2026-05-29T18:42:08.906993Z" modified="2026-05-29T18:42:08.906998Z" visited="2026-05-29T18:42:08.906994Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-05-29T18:42:08.906997Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-05-29_14_42_36.png" added="2026-05-29T18:42:41.270949Z" modified="2026-05-29T18:42:41.270955Z" visited="2026-05-29T18:42:41.270950Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-05-29T18:42:41.270952Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/VULN_BANK_DEVSECOP/zap_report.json" added="2026-05-29T18:50:58.632298Z" modified="2026-06-01T19:46:54.557197Z" visited="2026-05-29T18:50:58.632299Z">
+    <desc>Language: ; Encoding: UTF-8; Cursor: 0:0;</desc>
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>Mousepad</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="Thunar" exec="&apos;Thunar %u&apos;" modified="2026-05-29T18:50:58.632301Z" count="1"/>
+          <bookmark:application name="Mousepad" exec="&apos;mousepad %u&apos;" modified="2026-06-01T19:46:54.557195Z" count="3"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-05-31_17_50_16.png" added="2026-05-31T21:50:19.667301Z" modified="2026-05-31T21:50:19.667306Z" visited="2026-05-31T21:50:19.667302Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-05-31T21:50:19.667304Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Documents/thehive" added="2026-05-31T23:50:04.734523Z" modified="2026-05-31T23:50:05.014202Z" visited="2026-05-31T23:50:04.734524Z">
+    <desc>Language: ; Encoding: UTF-8; Cursor: 1:0;</desc>
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>Mousepad</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="Mousepad" exec="&apos;mousepad %u&apos;" modified="2026-05-31T23:50:05.014199Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-05-31_20_21_15.png" added="2026-06-01T00:21:20.866026Z" modified="2026-06-01T00:21:20.866031Z" visited="2026-06-01T00:21:20.866027Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-01T00:21:20.866029Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-05-31_20_26_12.png" added="2026-06-01T00:26:15.467734Z" modified="2026-06-01T00:26:15.467742Z" visited="2026-06-01T00:26:15.467735Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-01T00:26:15.467740Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-05-31_20_29_51.png" added="2026-06-01T00:29:55.311251Z" modified="2026-06-01T00:29:55.311261Z" visited="2026-06-01T00:29:55.311253Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-01T00:29:55.311258Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-05-31_20_39_56.png" added="2026-06-01T00:39:58.949544Z" modified="2026-06-01T00:39:58.949551Z" visited="2026-06-01T00:39:58.949545Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-01T00:39:58.949548Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-01_15_01_44.png" added="2026-06-01T19:01:47.588154Z" modified="2026-06-01T19:01:47.588159Z" visited="2026-06-01T19:01:47.588154Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-01T19:01:47.588157Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-01_15_02_07.png" added="2026-06-01T19:02:09.719186Z" modified="2026-06-01T19:02:09.719197Z" visited="2026-06-01T19:02:09.719188Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-01T19:02:09.719194Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-01_15_02_30.png" added="2026-06-01T19:02:33.309191Z" modified="2026-06-01T19:02:33.309199Z" visited="2026-06-01T19:02:33.309193Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-01T19:02:33.309196Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-01_15_14_26.png" added="2026-06-01T19:14:28.981369Z" modified="2026-06-01T19:14:28.981378Z" visited="2026-06-01T19:14:28.981370Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-01T19:14:28.981374Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-01_15_43_34.png" added="2026-06-01T19:43:37.348911Z" modified="2026-06-01T19:43:37.348916Z" visited="2026-06-01T19:43:37.348912Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-01T19:43:37.348914Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-01_15_47_13.png" added="2026-06-01T19:47:16.244077Z" modified="2026-06-01T19:47:16.244084Z" visited="2026-06-01T19:47:16.244078Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-01T19:47:16.244081Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-01_15_54_59.png" added="2026-06-01T19:55:09.996043Z" modified="2026-06-01T19:55:09.996053Z" visited="2026-06-01T19:55:09.996046Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-01T19:55:09.996050Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-01_15_55_46.png" added="2026-06-01T19:55:49.318627Z" modified="2026-06-01T19:55:49.318636Z" visited="2026-06-01T19:55:49.318628Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-01T19:55:49.318633Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_16_51_16.png" added="2026-06-10T20:51:20.307937Z" modified="2026-06-10T20:51:20.307944Z" visited="2026-06-10T20:51:20.307938Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T20:51:20.307942Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_16_59_00.png" added="2026-06-10T20:59:03.643306Z" modified="2026-06-10T20:59:03.643313Z" visited="2026-06-10T20:59:03.643307Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T20:59:03.643310Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_17_00_06.png" added="2026-06-10T21:00:09.335863Z" modified="2026-06-10T21:00:09.335868Z" visited="2026-06-10T21:00:09.335864Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T21:00:09.335866Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_17_00_48.png" added="2026-06-10T21:00:51.555865Z" modified="2026-06-10T21:00:51.555873Z" visited="2026-06-10T21:00:51.555867Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T21:00:51.555870Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_17_01_16.png" added="2026-06-10T21:01:18.907207Z" modified="2026-06-10T21:01:18.907215Z" visited="2026-06-10T21:01:18.907209Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T21:01:18.907212Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_17_02_10.png" added="2026-06-10T21:02:13.471217Z" modified="2026-06-10T21:02:13.471226Z" visited="2026-06-10T21:02:13.471219Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T21:02:13.471223Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_17_02_39.png" added="2026-06-10T21:02:41.875867Z" modified="2026-06-10T21:02:41.875873Z" visited="2026-06-10T21:02:41.875868Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T21:02:41.875871Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_17_04_19.png" added="2026-06-10T21:04:21.913255Z" modified="2026-06-10T21:04:21.913264Z" visited="2026-06-10T21:04:21.913256Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T21:04:21.913261Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_17_22_52.png" added="2026-06-10T21:22:56.496103Z" modified="2026-06-10T21:22:56.496109Z" visited="2026-06-10T21:22:56.496104Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T21:22:56.496107Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_17_28_33.png" added="2026-06-10T21:28:37.277023Z" modified="2026-06-10T21:28:37.277028Z" visited="2026-06-10T21:28:37.277024Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T21:28:37.277026Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_17_29_04.png" added="2026-06-10T21:29:06.671165Z" modified="2026-06-10T21:29:06.671179Z" visited="2026-06-10T21:29:06.671175Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T21:29:06.671177Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_17_29_28.png" added="2026-06-10T21:29:31.832775Z" modified="2026-06-10T21:29:31.832780Z" visited="2026-06-10T21:29:31.832775Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T21:29:31.832778Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_17_29_46.png" added="2026-06-10T21:29:48.639856Z" modified="2026-06-10T21:29:48.639865Z" visited="2026-06-10T21:29:48.639858Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T21:29:48.639862Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_17_30_13.png" added="2026-06-10T21:30:16.067254Z" modified="2026-06-10T21:30:16.067261Z" visited="2026-06-10T21:30:16.067256Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T21:30:16.067259Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/kali/Pictures/Screenshot_2026-06-10_17_30_30.png" added="2026-06-10T21:30:32.924146Z" modified="2026-06-10T21:30:32.924152Z" visited="2026-06-10T21:30:32.924147Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="ristretto" exec="&apos;ristretto %u&apos;" modified="2026-06-10T21:30:32.924150Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+</xbel>
