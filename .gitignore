@@ -1,12 +1,43 @@
-venv/
+# System files
+.config/
+.local/
 .cache/
 .mozilla/
 .BurpSuite/
+.java/
+.pki/
+.art/
+.vboxclient*
+.Xauthority
+.ICEauthority
+.xsession*
+.zsh_history
+.bash*
+.zsh*
+.profile
+.dmrc
+.face*
+.wget-hsts
+.sudo*
+.gitconfig
+
+# Project excludes
+venv/
 VULN_BANK_DEVSECOP/
-__pycache__/
-*.pyc
+Pictures/
+Documents/
+Desktop/
+Downloads/
+Videos/
+Music/
+Templates/
+Public/
+
+# Files
 *.pcap
 *.joblib
 *.so
 *.tgz
+*.pyc
+__pycache__/
 .env
