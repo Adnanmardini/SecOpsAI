@@ -14,6 +14,12 @@ SMTP_USER     = os.getenv("SMTP_USER")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 ALERT_TO      = os.getenv("ALERT_EMAIL_TO")
 
+SEVERITY_EMOJI = {
+    "critical": "🚨",
+    "high": "⚠️",
+    "medium": "🔶",
+    "low": "🔷",
+}
 
 def send_alert_email(subject: str, body: str, severity: str = "medium") -> bool:
     """
