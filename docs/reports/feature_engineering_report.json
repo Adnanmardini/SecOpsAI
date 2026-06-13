@@ -1,0 +1,143 @@
+{
+  "document_title": "SecOpsAI Feature Engineering Report",
+  "project": "SecOpsAI \u2014 DefenseGrid Team",
+  "author": "Data Scientist \u2014 Sub-Team 3",
+  "date": "2026-06-11",
+  "total_features": 27,
+  "executive_summary": "This document defines the 27 engineered security features used by the SecOpsAI ML detection engine. Features are organized into 5 groups, each targeting a specific attack scenario. Every feature is justified by a real attacker behavior and mapped to a MITRE ATT&CK technique.",
+  "feature_groups": {
+    "Group A \u2014 Basic Flow Statistics": {
+      "feature_count": 8,
+      "indices": "0-7",
+      "attack_scenarios": [
+        "All scenarios \u2014 baseline context"
+      ],
+      "mitre_technique": "T1071 \u2014 Application Layer Protocol",
+      "features": [
+        "duration",
+        "total_bytes",
+        "src_bytes",
+        "dst_bytes",
+        "bytes_ratio",
+        "total_packets",
+        "avg_packet_size",
+        "dst_port"
+      ]
+    },
+    "Group B \u2014 Behavioral Timing": {
+      "feature_count": 5,
+      "indices": "8-12",
+      "attack_scenarios": [
+        "C2 Beaconing"
+      ],
+      "mitre_technique": "T1071.001 \u2014 Web Protocols",
+      "key_insight": "Malware communicates on a schedule. Humans do not. Low coefficient of variation = automated = suspicious.",
+      "features": [
+        "interval_mean",
+        "interval_std",
+        "interval_cv",
+        "fwd_iat_mean",
+        "active_mean"
+      ]
+    },
+    "Group C \u2014 DNS Features": {
+      "feature_count": 5,
+      "indices": "13-17",
+      "attack_scenarios": [
+        "DNS Tunneling"
+      ],
+      "mitre_technique": "T1071.004 \u2014 DNS",
+      "key_insight": "Encoded data has high Shannon entropy (~5 bits). Normal hostnames have low entropy (~2 bits). Entropy threshold: anything above 3.5 is suspicious.",
+      "features": [
+        "dns_query_length",
+        "dns_subdomain_count",
+        "dns_query_entropy",
+        "dns_response_size",
+        "dns_is_txt_record"
+      ]
+    },
+    "Group D \u2014 Communication Patterns": {
+      "feature_count": 6,
+      "indices": "18-23",
+      "attack_scenarios": [
+        "Lateral Movement"
+      ],
+      "mitre_technique": "T1021 \u2014 Remote Services",
+      "key_insight": "Attackers scan many hosts and ports rapidly. High unique_dst_ports + high syn_flag_count = scanning.",
+      "features": [
+        "unique_dst_ports_1h",
+        "fwd_packets_per_second",
+        "internal_connection",
+        "protocol_encoded",
+        "syn_flag_count",
+        "fin_flag_count"
+      ]
+    },
+    "Group E \u2014 Volume and Rate": {
+      "feature_count": 3,
+      "indices": "24-26",
+      "attack_scenarios": [
+        "Slow-and-Low Exfiltration"
+      ],
+      "mitre_technique": "T1041 \u2014 Exfiltration Over C2 Channel",
+      "key_insight": "Exfiltration is slow by design to avoid thresholds. ML detects the sustained pattern, not the volume spike.",
+      "features": [
+        "bytes_per_second",
+        "bwd_packet_length_mean",
+        "flow_bytes_per_second"
+      ]
+    }
+  },
+  "dataset_statistics": {
+    "total_rows": 2313810,
+    "total_features": 27,
+    "benign_samples": 1977318,
+    "malicious_samples": 336492,
+    "attack_types": [
+      "Benign",
+      "FTP-Patator",
+      "SSH-Patator",
+      "Web Attack \ufffd Brute Force",
+      "Web Attack \ufffd XSS",
+      "Web Attack \ufffd Sql Injection",
+      "DDoS",
+      "Bot",
+      "DoS slowloris",
+      "DoS Slowhttptest",
+      "DoS Hulk",
+      "DoS GoldenEye",
+      "Heartbleed",
+      "Infiltration",
+      "PortScan"
+    ]
+  },
+  "top_5_features_by_separation": [
+    {
+      "feature": "fwd_iat_mean",
+      "separation": 51.294071197509766
+    },
+    {
+      "feature": "flow_packets_per_second",
+      "separation": 42.923655857224865
+    },
+    {
+      "feature": "fwd_packets_per_second",
+      "separation": 37.39537811279297
+    },
+    {
+      "feature": "active_mean",
+      "separation": 34.17976379394531
+    },
+    {
+      "feature": "init_fwd_win_bytes",
+      "separation": 33.029176717887424
+    }
+  ],
+  "data_quality_actions": [
+    "Replaced all Infinity values with 0 using np.nan_to_num",
+    "Replaced all NaN values with 0 using fillna(0)",
+    "Clipped all feature values to range [-100, 100]",
+    "Stripped whitespace from CICIDS column names (known dataset bug)"
+  ],
+  "class_imbalance_note": "CICIDS 2017 is heavily imbalanced \u2014 benign traffic dominates. The ML engineer will apply SMOTE during training to address this. Never evaluate this model using raw accuracy \u2014 use F1 score only."
+}

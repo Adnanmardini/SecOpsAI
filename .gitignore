@@ -216,11 +216,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-
-
+docs/reports/feature_matrix_sample.csv
 
 # SecOpsAI Project
-
 datasets/
 *.pcap
 
@@ -241,6 +239,7 @@ mlruns/
 # Project Logs
 audit.log
 security.log
+
 *.log
 # System files
 .config/
