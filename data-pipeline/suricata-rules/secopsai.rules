@@ -1,0 +1,21 @@
+# --- SCENARIO 1: C2 Beaconing ---
+alert tcp $HOME_NET any -> $EXTERNAL_NET [4444,6666,8888,31337,1337] (msg:"SECOPSAI C2 Beaconing - Suspicious outbound high port"; flow:established,to_server; threshold: type both, track by_src, count 5, seconds 300; classtype:trojan-activity; sid:1000001; rev:1; metadata:mitre_technique T1071;)
+# Fix: Using 'tcp' on port 80 to allow dsize + content
+alert tcp $HOME_NET any -> $EXTERNAL_NET 80 (msg:"SECOPSAI C2 Beaconing - Regular small HTTP connections"; flow:established,to_server; content:"GET"; dsize:<200; threshold: type both, track by_src, count 10, seconds 600; classtype:trojan-activity; sid:1000002; rev:3; metadata:mitre_technique T1071.001;)
+alert tcp $HOME_NET any -> $EXTERNAL_NET 80 (msg:"SECOPSAI C2 Beaconing - HTTP connection missing User-Agent"; flow:established,to_server; content:"GET"; content:!"User-Agent"; classtype:trojan-activity; sid:1000003; rev:3; metadata:mitre_technique T1071.001;)
+
+# --- SCENARIO 2: DNS Tunneling ---
+# Fix: Using 'udp' on port 53 to allow dsize and avoid dns_query buffer errors
+alert udp any any -> any 53 (msg:"SECOPSAI DNS Tunneling - Abnormally long DNS query"; dsize:>150; classtype:bad-unknown; sid:1000010; rev:3; metadata:mitre_technique T1071.004;)
+alert udp $HOME_NET any -> any 53 (msg:"SECOPSAI DNS Tunneling - High volume DNS query rate"; threshold: type both, track by_src, count 100, seconds 60; classtype:bad-unknown; sid:1000011; rev:3; metadata:mitre_technique T1071.004;)
+alert udp any any -> any 53 (msg:"SECOPSAI DNS Tunneling - Suspicious TXT record query volume"; content:"|00 10|"; threshold: type both, track by_src, count 10, seconds 60; classtype:bad-unknown; sid:1000012; rev:3; metadata:mitre_technique T1071.004;)
+
+# --- SCENARIO 3: Lateral Movement ---
+alert tcp $HOME_NET any -> $HOME_NET 445 (msg:"SECOPSAI Lateral Movement - Internal SMB connection volume"; flow:established,to_server; threshold: type both, track by_src, count 5, seconds 120; classtype:policy-violation; sid:1000020; rev:3; metadata:mitre_technique T1021.002;)
+alert tcp $HOME_NET any -> $HOME_NET 3389 (msg:"SECOPSAI Lateral Movement - RDP connection from internal host"; flow:established,to_server; classtype:policy-violation; sid:1000021; rev:3; metadata:mitre_technique T1021.001;)
+alert tcp $HOME_NET any -> $HOME_NET 135 (msg:"SECOPSAI Lateral Movement - WMI DCOM connection volume"; flow:established,to_server; threshold: type both, track by_src, count 10, seconds 60; classtype:policy-violation; sid:1000022; rev:3; metadata:mitre_technique T1021.003;)
+
+# --- SCENARIO 4: Data Exfiltration ---
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"SECOPSAI Exfiltration - Large outbound data transfer"; dsize:>1400; flow:established,to_server; classtype:policy-violation; sid:1000030; rev:3; metadata:mitre_technique T1041;)
+alert tcp $HOME_NET any -> $EXTERNAL_NET 21 (msg:"SECOPSAI Exfiltration - Outbound FTP to external host"; flow:established,to_server; classtype:policy-violation; sid:1000031; rev:3; metadata:mitre_technique T1048;)
+alert tcp $HOME_NET any -> $EXTERNAL_NET 80 (msg:"SECOPSAI Exfiltration - Repeated large HTTP POST"; flow:established,to_server; content:"POST"; dsize:>1400; threshold: type both, track by_src, count 5, seconds 300; classtype:policy-violation; sid:1000032; rev:3; metadata:mitre_technique T1041;)
