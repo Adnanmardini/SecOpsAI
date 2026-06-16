@@ -1,0 +1,108 @@
+{
+  "name": "SecOpsAI ATT&CK Coverage",
+  "description": "Coverage map for SecOpsAI Behavioral Threat Detection Platform",
+  "domain": "enterprise-attack",
+  "version": "4.6",
+  "techniques": [
+    {
+      "techniqueID": "T1190",
+      "score": 1,
+      "color": "#4A90E2",
+      "comment": "Rules-based detection of attacks against public-facing APIs"
+    },
+    {
+      "techniqueID": "T1110",
+      "score": 2,
+      "color": "#2ECC71",
+      "comment": "Rules and ML detection of brute-force activity"
+    },
+    {
+      "techniqueID": "T1078",
+      "score": 2,
+      "color": "#2ECC71",
+      "comment": "Rules and ML detection of valid account abuse"
+    },
+    {
+      "techniqueID": "T1046",
+      "score": 2,
+      "color": "#2ECC71",
+      "comment": "Rules and ML detection of network reconnaissance"
+    },
+    {
+      "techniqueID": "T1071",
+      "score": 2,
+      "color": "#2ECC71",
+      "comment": "Rules and ML detection of C2 activity"
+    },
+    {
+      "techniqueID": "T1071.004",
+      "score": 2,
+      "color": "#2ECC71",
+      "comment": "Rules and ML detection of DNS tunneling"
+    },
+    {
+      "techniqueID": "T1021",
+      "score": 2,
+      "color": "#2ECC71",
+      "comment": "Rules and ML detection of lateral movement"
+    },
+    {
+      "techniqueID": "T1041",
+      "score": 3,
+      "color": "#F39C12",
+      "comment": "ML-based detection of exfiltration over C2 channels"
+    },
+    {
+      "techniqueID": "T1001",
+      "score": 3,
+      "color": "#F39C12",
+      "comment": "ML-based detection of data obfuscation"
+    },
+    {
+      "techniqueID": "T1548",
+      "score": 2,
+      "color": "#2ECC71",
+      "comment": "Rules and ML detection of privilege escalation"
+    },
+    {
+      "techniqueID": "T1562",
+      "score": 3,
+      "color": "#F39C12",
+      "comment": "ML-based detection of disable or modify tools activity"
+    },
+    {
+      "techniqueID": "T1036",
+      "score": 3,
+      "color": "#F39C12",
+      "comment": "ML-based detection of masquerading behavior"
+    }
+  ],
+  "gradient": {
+    "colors": [
+      "#4A90E2",
+      "#2ECC71",
+      "#F39C12"
+    ],
+    "minValue": 1,
+    "maxValue": 3
+  },
+  "legendItems": [
+    {
+      "label": "Rules Only",
+      "color": "#4A90E2"
+    },
+    {
+      "label": "Rules + ML",
+      "color": "#2ECC71"
+    },
+    {
+      "label": "ML Only",
+      "color": "#F39C12"
+    }
+  ],
+  "metadata": [],
+  "links": [],
+  "showTacticRowBackground": false,
+  "tacticRowBackground": "#dddddd",
+  "selectTechniquesAcrossTactics": true
+}
