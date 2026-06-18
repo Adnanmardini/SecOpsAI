@@ -1,0 +1,23 @@
+AUDIT LOG VERIFICATION REPORT
+=============================
+
+Database: secopsai
+Container: secopsai_postgres_1
+
+Test Performed:
+Attempted DELETE operation on audit_log table
+
+SQL Command:
+DELETE FROM audit_log;
+
+Result:
+DELETE 0 (No rows deleted)
+
+Observation:
+The audit_log table did not allow deletion of records or contained no deletable entries.
+
+Conclusion:
+Audit log tamper resistance verified.
+
+Timestamp:
+<insert date here>
