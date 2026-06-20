@@ -4,6 +4,7 @@ import hashlib
 import uuid
 import time
 from kafka import KafkaConsumer
+from kafka.serializer import Deserializer
 from loguru import logger
 from dotenv import load_dotenv
 
@@ -55,6 +56,13 @@ def process_detection(detection: dict):
     return alert
 
 
+class JSONDeserializer(Deserializer):
+    def deserialize(self, topic, bytes_):
+        if bytes_ is None:
+            return None
+        return json.loads(bytes_.decode("utf-8"))
+
+
 def run_consumer():
     logger.info("Starting alert pipeline consumer...")
     logger.info(f"Alert threshold: {ALERT_THRESHOLD}")
@@ -63,7 +71,7 @@ def run_consumer():
         "detection-results",
         bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
         group_id="alert-pipeline-group",
-        value_deserializer=lambda v: json.loads(v.decode("utf-8")),
+        value_deserializer=JSONDeserializer(),
         auto_offset_reset="earliest",
         enable_auto_commit=False,
     )
