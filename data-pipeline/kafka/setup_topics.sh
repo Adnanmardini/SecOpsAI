@@ -4,7 +4,7 @@ KAFKA_BROKER="${KAFKA_BOOTSTRAP_SERVERS:-localhost:9092}"
 
 echo "[*] Setting up Kafka topics on $KAFKA_BROKER ..."
 
-kafka-topics.sh --create \
+kafka-topics --create \
     --bootstrap-server "$KAFKA_BROKER" \
     --topic raw-network-flows \
     --partitions 3 \
@@ -13,7 +13,7 @@ kafka-topics.sh --create \
     --if-not-exists
 echo "  ✓ raw-network-flows"
 
-kafka-topics.sh --create \
+kafka-topics --create \
     --bootstrap-server "$KAFKA_BROKER" \
     --topic feature-vectors \
     --partitions 3 \
@@ -22,7 +22,7 @@ kafka-topics.sh --create \
     --if-not-exists
 echo "  ✓ feature-vectors"
 
-kafka-topics.sh --create \
+kafka-topics --create \
     --bootstrap-server "$KAFKA_BROKER" \
     --topic detection-results \
     --partitions 2 \
@@ -31,7 +31,7 @@ kafka-topics.sh --create \
     --if-not-exists
 echo "  ✓ detection-results"
 
-kafka-topics.sh --create \
+kafka-topics --create \
     --bootstrap-server "$KAFKA_BROKER" \
     --topic security-alerts \
     --partitions 2 \
@@ -41,4 +41,4 @@ kafka-topics.sh --create \
 echo "  ✓ security-alerts"
 
 echo "[*] Current topics:"
-kafka-topics.sh --list --bootstrap-server "$KAFKA_BROKER"
+kafka-topics --list --bootstrap-server "$KAFKA_BROKER"
