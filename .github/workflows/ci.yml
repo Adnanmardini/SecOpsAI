@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - dev
-      - team-2
+      - team-2-data-engineering-infrastructure
 
   pull_request:
     branches:
@@ -15,15 +15,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set Up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Verify Docker Compose File
-        run: |
-          echo "Checking docker-compose.yml"
-          test -f docker-compose.yml
+      - name: Verify Docker Compose
+        run: test -f docker-compose.yml
+
+      - name: Verify FastAPI Application
+        run: test -f api/app/main.py
