@@ -1,0 +1,27 @@
+{
+  "Group_A_Basic_Flow": {
+    "f1": 0.9954913648702195,
+    "delta": -0.002745182599802054,
+    "importance": "LOW"
+  },
+  "Group_B_Timing": {
+    "f1": 0.9962827880090603,
+    "delta": -0.001953759460961213,
+    "importance": "LOW"
+  },
+  "Group_C_DNS_Proxy": {
+    "f1": 0.9982365474700216,
+    "delta": 0.0,
+    "importance": "LOW"
+  },
+  "Group_D_Communication": {
+    "f1": 0.9982365474700216,
+    "delta": 0.0,
+    "importance": "LOW"
+  },
+  "Group_E_Volume_Rate": {
+    "f1": 0.9982365474700216,
+    "delta": 0.0,
+    "importance": "LOW"
+  }
+}
