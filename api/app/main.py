@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/team-4-redteam-response
 from fastapi import FastAPI, HTTPException, Depends, Header, Request
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -117,6 +120,7 @@ async def get_audit_logs(user: dict = Depends(require_role("admin"))):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+<<<<<<< HEAD
 =======
 from fastapi import FastAPI
 
@@ -133,3 +137,5 @@ def root():
 def health_check():
     return {"status": "healthy"}
 >>>>>>> origin/team-1-security-architecture
+=======
+>>>>>>> origin/team-4-redteam-response
