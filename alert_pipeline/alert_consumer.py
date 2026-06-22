@@ -4,6 +4,7 @@ import hashlib
 import uuid
 import time
 from kafka import KafkaConsumer
+from kafka.serializer import Deserializer
 from loguru import logger
 from dotenv import load_dotenv
 
@@ -51,10 +52,66 @@ def process_detection(detection: dict):
     email_sent = send_alert_email(alert)
     alert["email_notified"] = email_sent
 
+    save_alert_to_db(alert)
+
     logger.info(f"Alert {alert['alert_id']} processed | severity={alert['severity']} | email={email_sent}")
     return alert
 
 
+class JSONDeserializer(Deserializer):
+    def deserialize(self, topic, bytes_):
+        if bytes_ is None:
+            return None
+        return json.loads(bytes_.decode("utf-8"))
+
+
+def save_alert_to_db(alert: dict) -> bool:
+    """Write processed alert to PostgreSQL."""
+    try:
+        import psycopg2
+        conn = psycopg2.connect(
+            host=os.getenv("POSTGRES_HOST", "localhost"),
+            port=int(os.getenv("POSTGRES_PORT", "5434")),
+            dbname=os.getenv("DB_NAME"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD")
+        )
+        cur = conn.cursor()
+
+        # Step 1 — Insert into detection_results first (FK requirement)
+        detection_id = str(uuid.uuid4())
+        cur.execute("""
+            INSERT INTO detection_results
+                (id, threat_score, threat_class)
+            VALUES (%s, %s, %s)
+        """, (
+            detection_id,
+            alert.get("threat_score", 0.0),
+            alert.get("threat_class", "unknown"),
+        ))
+
+        # Step 2 — Insert into security_alerts
+        cur.execute("""
+            INSERT INTO security_alerts
+                (id, detection_id, severity, alert_hash, email_notified)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (
+            str(uuid.uuid4()),
+            detection_id,
+            alert.get("severity", "medium"),
+            alert.get("alert_hash", ""),
+            alert.get("email_notified", False),
+        ))
+
+        conn.commit()
+        cur.close()
+        conn.close()
+        logger.info(f"Alert saved to DB: {alert.get('alert_id')}")
+        return True
+
+    except Exception as e:
+        logger.error(f"DB write failed: {e}")
+        return False
 def run_consumer():
     logger.info("Starting alert pipeline consumer...")
     logger.info(f"Alert threshold: {ALERT_THRESHOLD}")
@@ -63,7 +120,7 @@ def run_consumer():
         "detection-results",
         bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
         group_id="alert-pipeline-group",
-        value_deserializer=lambda v: json.loads(v.decode("utf-8")),
+        value_deserializer=JSONDeserializer(),
         auto_offset_reset="earliest",
         enable_auto_commit=False,
     )
