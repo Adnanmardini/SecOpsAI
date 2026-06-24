@@ -1,0 +1,22 @@
+{
+  "fgsm": {
+    "accuracy": 1.0,
+    "survived": true
+  },
+  "pgd": {
+    "accuracy": 1.0,
+    "survived": true
+  },
+  "cw": {
+    "accuracy": 1.0,
+    "survived": true
+  },
+  "zoo": {
+    "accuracy": 1.0,
+    "survived": true
+  },
+  "hsj": {
+    "accuracy": 0.0,
+    "survived": false
+  }
+}

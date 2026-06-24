@@ -1,0 +1,50 @@
+{
+  "fgsm": {
+    "clean_accuracy": 1.0,
+    "clean_f1": 1.0,
+    "adversarial_accuracy": 0.83,
+    "adversarial_f1": 0.7921,
+    "accuracy_drop": 0.17,
+    "f1_drop": 0.2079,
+    "model_broken": false,
+    "attack_method": "surrogate_gradient"
+  },
+  "pgd": {
+    "clean_accuracy": 1.0,
+    "clean_f1": 1.0,
+    "adversarial_accuracy": 0.8333,
+    "adversarial_f1": 0.7909,
+    "accuracy_drop": 0.1667,
+    "f1_drop": 0.2091,
+    "model_broken": false,
+    "attack_method": "surrogate_gradient"
+  },
+  "cw": {
+    "clean_accuracy": 1.0,
+    "clean_f1": 1.0,
+    "adversarial_accuracy": 0.95,
+    "adversarial_f1": 0.9575,
+    "accuracy_drop": 0.05,
+    "f1_drop": 0.0425,
+    "model_broken": false,
+    "attack_method": "surrogate_gradient"
+  },
+  "zoo": {
+    "clean_accuracy": 1.0,
+    "clean_f1": 1.0,
+    "adversarial_accuracy": 0.76,
+    "adversarial_f1": 0.7686,
+    "accuracy_drop": 0.24,
+    "f1_drop": 0.2314,
+    "model_broken": false,
+    "attack_method": "direct_blackbox",
+    "timed_out": false
+  },
+  "hopskipjump": {
+    "model_broken": false,
+    "timed_out": false,
+    "skipped": true,
+    "error": "No low-confidence samples available for HSJ init",
+    "attack_method": "direct_blackbox"
+  }
+}
