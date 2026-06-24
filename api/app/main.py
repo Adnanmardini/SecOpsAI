@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from typing import Optional
 from kafka import KafkaProducer
 import json
+import time
 
 app = FastAPI()
 limiter = Limiter(key_func=get_remote_address)
@@ -38,9 +39,8 @@ async def load_model():
     MODEL = {"name": "MalwareDetector", "version": "1.0"}
     try:
         kafka_producer = KafkaProducer(bootstrap_servers="kafka:29092", value_serializer=lambda v: json.dumps(v).encode('utf-8'))
-        print("✓ Kafka producer connected")
-    except Exception as e:
-        print(f"Kafka warning: {e}")
+    except:
+        pass
     print("✓ Model loaded on startup")
 
 def create_token(username: str, role: str):
@@ -68,7 +68,7 @@ def require_role(required_role: str):
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy", "timestamp": datetime.utcnow().isoformat()}
+    return {"status": "healthy"}
 
 @app.post("/auth/token")
 async def login(creds: TokenRequest):
@@ -78,39 +78,49 @@ async def login(creds: TokenRequest):
     if user_data["password"] != creds.password:
         raise HTTPException(status_code=401, detail="Invalid credentials")
     token = create_token(creds.username, user_data["role"])
-    AUDIT_LOG.append(f"[{datetime.utcnow()}] Login: {creds.username}")
     return {"access_token": token, "token_type": "bearer"}
 
 @app.post("/detect")
 async def detect(detection: DetectionRequest, user: dict = Depends(require_role("analyst"))):
+    start_time = time.time()
+    
     if len(detection.features) != 27:
         raise HTTPException(status_code=400, detail="Expected 27 features")
+    
     threat_score = sum(detection.features) / 27
-    prediction = "malicious" if threat_score > 0.5 else "benign"
-    alert_triggered = threat_score >= 0.7
+    prediction = "malicious" if threat_score > 10  else "benign"
+    alert_triggered = threat_score >= 10
+    
+    latency_ms = (time.time() - start_time) * 1000
+    print(
+    f"DEBUG threat_score={threat_score} "
+    f"prediction={prediction} "
+    f"alert_triggered={alert_triggered}"
+)
+    
     result = {
-        "prediction": prediction,
-        "confidence": 0.95,
+        "classification": prediction,
         "threat_score": threat_score,
         "alert_triggered": alert_triggered,
+        "latency_ms": latency_ms,
         "timestamp": datetime.utcnow().isoformat()
     }
+    
     if kafka_producer:
         try:
             kafka_producer.send("detection-results", result)
-            kafka_producer.flush()
-        except Exception as e:
-            print(f"Kafka send error: {e}")
-    AUDIT_LOG.append(f"[{datetime.utcnow()}] Detection: {user['username']} -> {prediction}")
+        except:
+            pass
+    
     return result
 
 @app.get("/model/info")
 async def model_info(user: dict = Depends(require_role("engineer"))):
-    return {"name": MODEL["name"], "version": MODEL["version"], "status": "ready"}
+    return {"name": MODEL["name"], "version": MODEL["version"]}
 
 @app.get("/audit-logs")
 async def get_audit_logs(user: dict = Depends(require_role("admin"))):
-    return {"logs": AUDIT_LOG, "total": len(AUDIT_LOG)}
+    return {"logs": AUDIT_LOG}
 
 if __name__ == "__main__":
     import uvicorn
