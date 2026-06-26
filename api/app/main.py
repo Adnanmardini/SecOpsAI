@@ -125,3 +125,4 @@ async def get_audit_logs(user: dict = Depends(require_role("admin"))):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
