@@ -1,0 +1,2 @@
+DETECTION ENGINEER LESSONS LEARNED
+During this project I learned that traditional security rules are good for finding known threats but they fail against modern hackers. My Day 2 testing showed a very low F1 score for rules. I learned how to translate network signatures into Python code to create a baseline. I also learned how to fix memory errors when working with large data. The most important lesson was seeing the AI model improve our detection by over 99 percent which meets all client requirements.
