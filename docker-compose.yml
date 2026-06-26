@@ -6,9 +6,9 @@ services:
     ports:
       - "8000:8000"
 
-  alert-pipeline:
-    build: ./alert-pipeline
-    container_name: alert-pipeline
+  alert_pipeline:
+    build: ./alert_pipeline
+    container_name: alert_pipeline
     depends_on:
       - redis
 
