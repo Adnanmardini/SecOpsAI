@@ -9,6 +9,7 @@ services:
   alert_pipeline:
     build: ./alert_pipeline
     container_name: alert_pipeline
+    restart: unless-stopped
     depends_on:
       - redis
 
@@ -53,6 +54,7 @@ services:
   kafka:
     image: apache/kafka:latest
     container_name: kafka
+    restart: on-failure
     ports:
       - "9092:9092"
     environment:
