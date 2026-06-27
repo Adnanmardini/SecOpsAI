@@ -1,3 +1,6 @@
+import time
+
+
 def process_alert(alert_data):
     """
     Basic alert processing function.
@@ -9,10 +12,17 @@ def process_alert(alert_data):
 
 
 if __name__ == "__main__":
-    sample_alert = {
-        "id": 1,
-        "severity": "high",
-        "message": "Suspicious activity detected"
-    }
+    print("Alert Pipeline started. Waiting for alerts...")
 
-    print(process_alert(sample_alert))
+    while True:
+        sample_alert = {
+            "id": 1,
+            "severity": "high",
+            "message": "Suspicious activity detected"
+        }
+
+        result = process_alert(sample_alert)
+        print(result)
+
+        # simulate waiting for new alerts
+        time.sleep(30)
