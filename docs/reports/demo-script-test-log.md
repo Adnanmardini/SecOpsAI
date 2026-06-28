@@ -1,6 +1,6 @@
 # Demo Script Test Log — Day 5
 
-## Final Demo Run — SUCCESS ✅
+## Final Demo Runs — ALL PASS ✅
 
 Date: June 24, 2026
 Tester: Red Team Engineer
@@ -24,17 +24,20 @@ Branch: team-4-redteam-response
 - Inference latency: <0.01ms (well under 200ms SLA) ✅
 - JWT token validity: 30 minutes with role-based access ✅
 
-### Fixes Applied (Day 4-5)
-- Fixed API response fields: `classification` + `latency_ms` (was showing "error" and "errorms")
-- Fixed benign traffic threshold logic (now correctly returns NO alert)
-- Fixed Kafka bootstrap server configuration
-- Fixed Docker Dockerfile indentation and caching issues
-
 ### Consecutive Runs
-- Run 1: PASS ✅
-- Run 2: Ready for execution
+- Run 1: PASS ✅ (Exit code: 0)
+- Run 2: PASS ✅ (Exit code: 0)
+
+### Fixes Applied (Day 4-5)
+- Fixed API response fields: `classification` + `latency_ms`
+- Fixed benign traffic threshold logic
+- Fixed Docker Dockerfile configuration
+- Fixed Kafka bootstrap server addresses
 
 ### Sign-off
-Demo verified: YES
-Ready for presentation: YES
-Fallback plan: Screenshots available in docs/demo-fallbacks/
+Demo verified: **YES** ✅
+Ready for presentation: **YES** ✅
+Consecutive passing runs: **2** ✅
+
+---
+*Red Team Engineer - Day 5 Complete*
