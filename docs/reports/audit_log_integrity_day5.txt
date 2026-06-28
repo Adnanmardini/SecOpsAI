@@ -1,0 +1,23 @@
+Audit Log Integrity Report
+==========================
+
+Verification Time: Fri Jun 26 11:40:17 AM EDT 2026
+
+Database: secopsai
+
+Audit Log Entries:
+0
+
+Detection Results:
+0
+
+Integrity Status:
+NOT VERIFIED
+
+Reason:
+The audit_log table exists but contains no records.
+The detection_results table also contains no records.
+Therefore, the audit hash chain cannot be validated.
+
+Conclusion:
+No evidence of tampering was found, but integrity verification could not be performed because no audit records have been generated.
