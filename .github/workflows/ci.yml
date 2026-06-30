@@ -1,0 +1,45 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - dev
+      - team-2-data-engineering-infrastructure
+
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verify Docker Compose
+        run: test -f docker-compose.yml
+
+      - name: Verify FastAPI Application
+        run: test -f api/app/main.py
+
+  model-regression:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Run Model Regression Test
+        run: pytest ml-engine/tests/test_model_regression.py

@@ -1,0 +1,15 @@
+{
+  "baseline_type": "suricata_rule_equivalent",
+  "overall": {
+    "f1": 0.0048,
+    "precision": 0.17,
+    "recall": 0.0024,
+    "true_positives": 1366,
+    "false_positives": 6670,
+    "true_negatives": 2266427,
+    "false_negatives": 556280
+  },
+  "ml_target": {
+    "minimum_f1_required": 0.1548
+  }
+}

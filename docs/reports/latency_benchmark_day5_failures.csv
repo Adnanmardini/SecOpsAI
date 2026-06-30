@@ -1,0 +1,3 @@
+Method,Name,Error,Occurrences,First Seen,Last Seen
+POST,/auth/token,HTTPError('429 Client Error: Too Many Requests for url: /auth/token'),45,2026-06-26T11:06:58Z,2026-06-26T11:07:06Z
+POST,/detect,HTTPError('429 Client Error: Too Many Requests for url: /detect'),411,2026-06-26T11:06:59Z,2026-06-26T11:07:26Z
