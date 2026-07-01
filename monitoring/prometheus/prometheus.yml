@@ -12,5 +12,5 @@ scrape_configs:
       
 #  - job_name: "metrics_collector"
  #   static_configs:
- #     - targets:
- #         - "host.docker.internal:8001"
+ #     - targets: ["10.0.2.15:8001"]
+  
