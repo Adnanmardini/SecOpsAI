@@ -6,6 +6,8 @@ services:
       - "8000:8000"
     networks:
       - secopsai-network
+    volumes:
+      - ./ml-engine/models:/app/models:ro
 
   alert_pipeline:
     build: ./alert_pipeline
