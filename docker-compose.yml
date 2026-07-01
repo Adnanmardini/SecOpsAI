@@ -4,6 +4,12 @@ services:
     container_name: threat-api
     ports:
       - "8000:8000"
+    volumes:
+      - ./ml-engine/models:/app/ml-engine/models:ro
+    environment:
+      - MODEL_PATH=ml-engine/models/xgboost_hardened.json
+      - SCALER_PATH=ml-engine/models/scaler.joblib
+      - ENCODER_PATH=ml-engine/models/label_encoder.joblib
     networks:
       - secopsai-network
 

@@ -225,6 +225,7 @@ datasets/
 # ML Artifacts
 *.pkl
 *.joblib
+ml-engine/models/*.json
 *.pt
 mlruns/
 
