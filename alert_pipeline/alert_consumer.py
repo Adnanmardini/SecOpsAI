@@ -1,158 +1,174 @@
 import json
+import logging
 import os
-import hashlib
-import uuid
 import time
-from kafka import KafkaConsumer
-from kafka.serializer import Deserializer
-from loguru import logger
+from datetime import datetime, timezone
+
 from dotenv import load_dotenv
+from kafka import KafkaConsumer
+
+from enrichment.enricher import AlertEnricher
+from notifications.email_notifier import send_alert_email
+from response.containment import ContainmentEngine
 
 load_dotenv()
 
-KAFKA_BOOTSTRAP_SERVERS = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092")
-ALERT_THRESHOLD = float(os.getenv("ALERT_THRESHOLD", "0.7"))
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s"
+)
+logger = logging.getLogger("secopsai.alert_consumer")
+
+# ── Configuration ─────────────────────────────────────────────────────────
+BOOTSTRAP_SERVERS = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092")
+TOPIC             = "detection-results"
+GROUP_ID          = "secopsai-alert-consumer"
+ALERT_THRESHOLD   = float(os.getenv("ALERT_THRESHOLD", "0.70"))
+AUTO_CONTAIN_THRESHOLD = float(os.getenv("AUTO_CONTAIN_THRESHOLD", "0.90"))
+
+# ── Severity classification ───────────────────────────────────────────────
+def classify_severity(threat_score: float, threat_class: str) -> str:
+    """Classify alert severity based on score and threat category."""
+    if threat_score >= 0.90:
+        return "critical"
+    if threat_score >= 0.80:
+        return "high"
+    if threat_score >= 0.70:
+        return "medium"
+    return "low"
 
 
-def compute_alert_hash(alert: dict) -> str:
-    alert_str = json.dumps(alert, sort_keys=True, default=str)
-    return hashlib.sha256(alert_str.encode()).hexdigest()
-
-
-def process_detection(detection: dict):
-    threat_score = float(detection.get("threat_score", 0.0))
-    threat_class = detection.get("threat_class", "unknown")
-    src_ip = detection.get("src_ip", "0.0.0.0")
-
-    if threat_score < ALERT_THRESHOLD:
-        logger.debug(f"Below threshold ({threat_score:.2f}): {threat_class}")
-        return None
-
-    logger.info(f"ALERT: {threat_class} | score={threat_score:.2%} | src={src_ip}")
-
-    from alert_pipeline.enrichment.enricher import AlertEnricher
-    from alert_pipeline.notifications.email_notifier import send_alert_email
-
-    enricher = AlertEnricher()
-    enrichment = enricher.enrich_ip(src_ip) if src_ip != "0.0.0.0" else {}
-
-    alert = {
-        "alert_id": str(uuid.uuid4()),
-        "timestamp": time.time(),
-        "threat_score": threat_score,
-        "threat_class": threat_class,
-        "src_ip": src_ip,
-        "dst_ip": detection.get("dst_ip", "unknown"),
-        "severity": enrichment.get("severity", "medium"),
-        "enrichment": enrichment,
-        "status": "open",
-    }
-
-    alert["alert_hash"] = compute_alert_hash(alert)
-    email_sent = send_alert_email(alert)
-    alert["email_notified"] = email_sent
-
-    save_alert_to_db(alert)
-
-    logger.info(f"Alert {alert['alert_id']} processed | severity={alert['severity']} | email={email_sent}")
-    return alert
-
-
-class JSONDeserializer(Deserializer):
-    def deserialize(self, topic, bytes_):
-        if bytes_ is None:
-            return None
-        return json.loads(bytes_.decode("utf-8"))
-
-
-def save_alert_to_db(alert: dict) -> bool:
-    """Write processed alert to PostgreSQL."""
+# ── PostgreSQL alert writer ───────────────────────────────────────────────
+def write_alert_to_db(alert_data: dict) -> None:
+    """Write enriched alert record to PostgreSQL security_alerts table."""
     try:
         import psycopg2
-        conn = psycopg2.connect(
-            host=os.getenv("POSTGRES_HOST", "localhost"),
-            port=int(os.getenv("POSTGRES_PORT", "5434")),
-            dbname=os.getenv("DB_NAME"),
-            user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASSWORD")
-        )
-        cur = conn.cursor()
-
-        # Step 1 — Insert into detection_results first (FK requirement)
-        detection_id = str(uuid.uuid4())
-        cur.execute("""
-            INSERT INTO detection_results
-                (id, threat_score, threat_class)
-            VALUES (%s, %s, %s)
-        """, (
-            detection_id,
-            alert.get("threat_score", 0.0),
-            alert.get("threat_class", "unknown"),
-        ))
-
-        # Step 2 — Insert into security_alerts
-        cur.execute("""
-            INSERT INTO security_alerts
-                (id, detection_id, severity, alert_hash, email_notified)
-            VALUES (%s, %s, %s, %s, %s)
-        """, (
-            str(uuid.uuid4()),
-            detection_id,
-            alert.get("severity", "medium"),
-            alert.get("alert_hash", ""),
-            alert.get("email_notified", False),
-        ))
-
-        conn.commit()
-        cur.close()
-        conn.close()
-        logger.info(f"Alert saved to DB: {alert.get('alert_id')}")
-        return True
-
+        conn = psycopg2.connect(os.getenv("DATABASE_URL"))
+        with conn.cursor() as cur:
+            cur.execute("""
+                INSERT INTO security_alerts (
+                    alert_id, threat_class, threat_score, severity,
+                    src_ip, dst_ip, vt_malicious_count, shodan_open_ports,
+                    email_notified, status, timestamp
+                ) VALUES (
+                    %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                )
+            """, (
+                alert_data["alert_id"],
+                alert_data["threat_class"],
+                alert_data["threat_score"],
+                alert_data["severity"],
+                alert_data.get("src_ip", "unknown"),
+                alert_data.get("dst_ip", "unknown"),
+                alert_data.get("vt_malicious_count", 0),
+                json.dumps(alert_data.get("shodan_open_ports", [])),
+                alert_data.get("email_sent", False),
+                "open",
+                datetime.now(timezone.utc)
+            ))
+            conn.commit()
+        logger.info(f"Alert written to PostgreSQL: {alert_data['alert_id']}")
     except Exception as e:
-        logger.error(f"DB write failed: {e}")
-        return False
+        logger.error(f"Failed to write alert to PostgreSQL: {e}")
+    finally:
+        if 'conn' in locals():
+            conn.close()
+
+
+# ── Main consumer loop ────────────────────────────────────────────────────
 def run_consumer():
-    logger.info("Starting alert pipeline consumer...")
+    """Main consumer loop — processes detection results from Kafka."""
+    logger.info(f"Starting alert consumer on topic: {TOPIC}")
     logger.info(f"Alert threshold: {ALERT_THRESHOLD}")
+    logger.info(f"Auto-containment threshold: {AUTO_CONTAIN_THRESHOLD}")
+
+    enricher    = AlertEnricher()
+    containment = ContainmentEngine()
 
     consumer = KafkaConsumer(
-        "detection-results",
-        bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
-        group_id="alert-pipeline-group",
-        value_deserializer=JSONDeserializer(),
-        auto_offset_reset="earliest",
-        enable_auto_commit=False,
+        TOPIC,
+        bootstrap_servers=BOOTSTRAP_SERVERS,
+        group_id=GROUP_ID,
+        auto_offset_reset="latest",
+        value_deserializer=lambda m: json.loads(m.decode("utf-8")),
+        consumer_timeout_ms=-1,  # Run indefinitely
     )
 
-    logger.info("Consumer connected to Kafka. Waiting for messages...")
-    processed = 0
-    alerts_fired = 0
+    logger.info("Consumer ready — waiting for detection results...")
 
-    try:
-        for message in consumer:
-            try:
-                detection = message.value
-                alert = process_detection(detection)
+    for message in consumer:
+        detection = message.value
 
-                if alert:
-                    alerts_fired += 1
-                    logger.info(f"Alert fired #{alerts_fired}: {alert['alert_id']}")
+        threat_score = float(detection.get("threat_score", 0.0))
+        threat_class = str(detection.get("threat_class", "unknown"))
+        src_ip       = detection.get("src_ip", "unknown")
+        dst_ip       = detection.get("dst_ip", "unknown")
 
-                processed += 1
-                consumer.commit()
+        # Filter: below threshold — log and skip
+        if threat_score < ALERT_THRESHOLD or threat_class.lower() == "benign":
+            logger.info(
+                f"BELOW THRESHOLD — score={threat_score:.4f} "
+                f"class={threat_class} — no alert"
+            )
+            continue
 
-                if processed % 100 == 0:
-                    logger.info(f"Processed {processed} messages, {alerts_fired} alerts fired")
+        # Above threshold — process alert
+        import uuid
+        alert_id = str(uuid.uuid4())
+        severity = classify_severity(threat_score, threat_class)
 
-            except Exception as e:
-                logger.error(f"Error processing message: {e}")
+        logger.info(
+            f"ALERT TRIGGERED — "
+            f"id={alert_id[:8]} "
+            f"score={threat_score:.4f} "
+            f"class={threat_class} "
+            f"severity={severity} "
+            f"src={src_ip}"
+        )
 
-    except KeyboardInterrupt:
-        logger.info("Consumer stopped by user")
-    finally:
-        consumer.close()
-        logger.info(f"Consumer shutdown. Total processed: {processed}, alerts fired: {alerts_fired}")
+        # Step 1: Enrich IP address
+        logger.info(f"Enriching IP: {src_ip}")
+        enrichment = enricher.enrich_ip(src_ip)
+
+        alert_data = {
+            "alert_id":            alert_id,
+            "threat_class":        threat_class,
+            "threat_score":        threat_score,
+            "severity":            severity,
+            "src_ip":              src_ip,
+            "dst_ip":              dst_ip,
+            "vt_malicious_count":  enrichment.get("vt_malicious_count", 0),
+            "shodan_open_ports":   enrichment.get("open_ports", []),
+            "timestamp":           datetime.now(timezone.utc).isoformat(),
+        }
+
+        # Step 2: Send email notification
+        try:
+            send_alert_email(alert_data)
+            alert_data["email_sent"] = True
+            logger.info("Email notification sent")
+        except Exception as e:
+            logger.error(f"Email notification failed: {e}")
+            alert_data["email_sent"] = False
+
+        # Step 3: Write to PostgreSQL
+        write_alert_to_db(alert_data)
+
+        # Step 4: Auto-containment for critical threats
+        if (threat_score >= AUTO_CONTAIN_THRESHOLD and
+                severity == "critical"):
+            logger.info(
+                f"AUTO-CONTAINMENT triggered — "
+                f"score={threat_score:.4f} src={src_ip}"
+            )
+            containment.block_ip(
+                ip=src_ip,
+                reason=f"Auto-containment: {threat_class} score={threat_score:.4f}",
+                alert_id=alert_id,
+                triggered_by="automated_pipeline"
+            )
+
+        logger.info(f"Alert processing complete: {alert_id[:8]}")
 
 
 if __name__ == "__main__":
