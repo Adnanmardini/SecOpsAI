@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+slowapi
+python-jose[cryptography]
+passlib[bcrypt]
+prometheus-fastapi-instrumentator
+loguru
+sqlalchemy
+psycopg2-binary
+scikit-learn
+xgboost
+kafka-python
+python-multipart
+pydantic[email]
+redis
