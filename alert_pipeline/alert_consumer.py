@@ -1,3 +1,13 @@
+"""
+Consumes detection results from Kafka.
+For scores above ALERT_THRESHOLD:
+  1. Enriches IP via VirusTotal + Shodan
+  2. Classifies severity
+  3. Sends email notification
+  4. Logs containment action to JSONL (MOCK execution)
+  5. Writes alert record to PostgreSQL
+"""
+
 import json
 import logging
 import os
@@ -47,8 +57,8 @@ def write_alert_to_db(alert_data: dict) -> None:
         with conn.cursor() as cur:
             cur.execute("""
                 INSERT INTO security_alerts (
-                    alert_id, threat_class, threat_score, severity,
-                    src_ip, dst_ip, vt_malicious_count, shodan_open_ports,
+                    id, threat_class, threat_score, severity,
+                    src_ip, dst_ip, vt_malicious_count, shodan_ports,
                     email_notified, status, timestamp
                 ) VALUES (
                     %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
