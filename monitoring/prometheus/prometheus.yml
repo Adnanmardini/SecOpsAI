@@ -10,7 +10,7 @@ scrape_configs:
  #   static_configs:
  #     - targets: ["api:8000"]
       
-  - job_name: "metrics_collector"
-    static_configs:
-      - targets:
-          - "host.docker.internal:8001"
+#  - job_name: "metrics_collector"
+ #   static_configs:
+ #     - targets: ["10.0.2.15:8001"]
+  
