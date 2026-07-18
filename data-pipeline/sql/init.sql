@@ -114,15 +114,4 @@ CREATE TABLE IF NOT EXISTS model_versions (
     deployed_at             TIMESTAMP WITH TIME ZONE, 
     deployed_by             UUID REFERENCES users(id), 
     created_at              TIMESTAMP WITH TIME ZONE DEFAULT NOW() 
-); 
- 
-Verify the SQL is valid: 
-# Test it locally if PostgreSQL is installed 
-psql -U postgres -f data-pipeline/sql/init.sql 
- 
-# Or validate syntax with: 
-python3 -c " 
-with open('data-pipeline/sql/init.sql') as f: 
-    content = f.read() 
-print('SQL file exists and is readable') 
-print(f'Lines: {len(content.splitlines())}') 
+);
