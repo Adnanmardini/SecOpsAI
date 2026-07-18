@@ -1,10 +1,17 @@
 services:
-
   api:
     build: ./api
     container_name: threat-api
     ports:
       - "8000:8000"
+    volumes:
+      - ./ml-engine/models:/app/ml-engine/models:ro
+    environment:
+      - MODEL_PATH=ml-engine/models/xgboost_hardened.json
+      - SCALER_PATH=ml-engine/models/scaler.joblib
+      - ENCODER_PATH=ml-engine/models/label_encoder.joblib
+    networks:
+      - secopsai-network
 
   alert_pipeline:
     build: ./alert_pipeline
@@ -12,6 +19,8 @@ services:
     restart: unless-stopped
     depends_on:
       - redis
+    networks:
+      - secopsai-network
 
   postgres:
     image: postgres:16
@@ -22,34 +31,35 @@ services:
       POSTGRES_DB: ${DB_NAME}
     ports:
       - "5433:5432"
-
     restart: unless-stopped
+    networks:
+      - secopsai-network
     volumes:
+      - postgres_data:/var/lib/postgresql/data
       - ./data-pipeline/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
-
 
   redis:
     image: redis:7
+    networks:
+      - secopsai-network
 
   prometheus:
     image: prom/prometheus
     ports:
-      - "9090:9090"    
+      - "9090:9090"
+    networks:
+      - secopsai-network
     volumes:
       - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
 
   grafana:
     image: grafana/grafana
-
     ports:
-    - "3000:3000"
-
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.5.0
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-    ports:
-      - "2181:2181"
+      - "3000:3000"
+    networks:
+      - secopsai-network
+    volumes:
+      - grafana_data:/var/lib/grafana
 
   kafka:
     image: apache/kafka:latest
@@ -57,6 +67,8 @@ services:
     restart: on-failure
     ports:
       - "9092:9092"
+    networks:
+      - secopsai-network
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
@@ -67,4 +79,18 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      
+      KAFKA_HEAP_OPTS: "-Xmx512m -Xms256m"
+      KAFKA_BROKER_HEARTBEAT_INTERVAL_MS: 5000
+      KAFKA_BROKER_SESSION_TIMEOUT_MS: 18000
+      KAFKA_CONTROLLER_QUORUM_REQUEST_TIMEOUT_MS: 60000
+      KAFKA_CONTROLLER_QUORUM_ELECTION_TIMEOUT_MS: 10000
+      KAFKA_REQUEST_TIMEOUT_MS: 60000
+      KAFKA_CONNECTIONS_MAX_IDLE_MS: 540000
+
+networks:
+  secopsai-network:
+    driver: bridge
+
+volumes:
+  grafana_data:
+  postgres_data:
