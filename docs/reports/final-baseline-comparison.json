@@ -1,0 +1,16 @@
+{
+  "document_title": "Detection Baseline vs ML Comparison Final",
+  "date": "2026-06-26",
+  "rule_baseline": {
+    "method": "Suricata rules Python equivalent",
+    "overall_f1": 0.0048,
+    "precision": 0.17,
+    "recall": 0.0024
+  },
+  "ml_model": {
+    "method": "XGBoost Behavioral",
+    "overall_f1": 0.9992,
+    "status": "Target Met"
+  },
+  "improvement_score": 0.9944
+}
