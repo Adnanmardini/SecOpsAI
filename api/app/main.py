@@ -379,6 +379,14 @@ async def model_info(
             "E_volume_rate":      "indices 24-26 (bytes/s, down/up ratio — exfil)",
         }
     }
+    
+    if kafka_producer:
+        try:
+            kafka_producer.send("detection-results", result)
+        except:
+            pass
+    
+    return result
 
 
 @app.get("/audit-logs", tags=["Compliance"])

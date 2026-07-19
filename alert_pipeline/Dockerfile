@@ -7,3 +7,4 @@ COPY . .
 RUN pip install redis
 
 CMD ["python", "alert_processor.py"]
+

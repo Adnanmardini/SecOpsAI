@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "document_title": "Adversarial Robustness Report",
   "project": "SecOpsAI \u2014 DefenseGrid Team",
   "author": "Data Scientist \u2014 Sub-Team 3",
@@ -115,3 +116,48 @@
     ]
   }
 }
+=======
+  "report_metadata": {
+    "title": "Adversarial Robustness Report — SecOpsAI",
+    "version": "1.0",
+    "date": "2026-06-25",
+    "author": "Security Analyst — Sub-Team 4",
+    "status": "FINAL"
+  },
+  "executive_summary": {
+    "overview": "This report documents the adversarial robustness evaluation of the SecOpsAI XGBoost detection model. Five attack types were evaluated using IBM Adversarial Robustness Toolbox (ART). The model was then hardened using adversarial training and re-evaluated.",
+    "key_finding": "The model survived 3 out of 5 adversarial attacks post-hardening, meeting the project requirement.",
+    "recommendation": "Deploy the hardened model to production. Monitor for model drift and re-evaluate robustness every 30 days."
+  },
+  "defense_accuracy_tradeoff": {
+    "pre_hardening_accuracy": 0.94,
+    "post_hardening_accuracy": 0.89,
+    "accuracy_drop": 0.05,
+    "note": "A 5% accuracy drop is acceptable given the significant improvement in adversarial robustness. The hardened model is more reliable in real-world attack scenarios."
+  },
+  "attack_results": {
+    "pre_hardening": {
+      "fgsm": {"survived": false, "accuracy_drop": 0.42},
+      "pgd": {"survived": false, "accuracy_drop": 0.51},
+      "cw": {"survived": false, "accuracy_drop": 0.38},
+      "zoo": {"survived": true, "accuracy_drop": 0.12},
+      "hopskipjump": {"survived": true, "accuracy_drop": 0.18}
+    },
+    "post_hardening": {
+      "fgsm": {"survived": true, "accuracy_drop": 0.08},
+      "pgd": {"survived": true, "accuracy_drop": 0.11},
+      "cw": {"survived": false, "accuracy_drop": 0.31},
+      "zoo": {"survived": true, "accuracy_drop": 0.09},
+      "hopskipjump": {"survived": true, "accuracy_drop": 0.07}
+    }
+  },
+  "open_risks": [
+    {
+      "risk": "CW attack still breaks the model post-hardening",
+      "severity": "high",
+      "mitigation": "Rate limiting on API prevents automated CW attacks in production"
+    },
+    {
+      "risk": "Model trained on CICIDS 2017 dataset may not generalize to newer attack patterns",
+      "severity":
+>>>>>>> origin/team-4-redteam-response

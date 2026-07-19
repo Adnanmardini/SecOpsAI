@@ -72,10 +72,10 @@ BENIGN=$(curl -s -X POST $API_URL/detect \
     -H "Content-Type: application/json" \
     -d '{"features":[0.01,0.01,0.01,0.01,1.0,3.0,15.0,6.0,0.0,0.0,0.0,0.0,0.0,0.0,1.5,1.0,50.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]}')
 
-BENIGN_CLASS=$(echo $BENIGN | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('threat_class','error'))")
+BENIGN_CLASS=$(echo $BENIGN | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('classification','error'))")
 BENIGN_SCORE=$(echo $BENIGN | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('threat_score','error'))")
 BENIGN_ALERT=$(echo $BENIGN | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('alert_triggered','error'))")
-BENIGN_MS=$(echo $BENIGN | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('inference_latency_ms','error'))")
+BENIGN_MS=$(echo $BENIGN | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('latency_ms','error'))")
 
 echo "  Classification:  ${BENIGN_CLASS}"
 echo "  Threat Score:    ${BENIGN_SCORE}"
@@ -98,10 +98,10 @@ MALICIOUS=$(curl -s -X POST $API_URL/detect \
     -H "Content-Type: application/json" \
     -d '{"features":[60.0,1024.0,900.0,124.0,7.25,12.0,85.3,6.0,120.0,5.0,0.04,100.0,0.0,62.8,31.0,980.0,17.06,6.25,0.0,0.0,0.0,0.0,10937.5,8192.0,1246875.0,440.0,0.0]}')
 
-MAL_CLASS=$(echo $MALICIOUS | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('threat_class','error'))")
+MAL_CLASS=$(echo $MALICIOUS | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('classification','error'))")
 MAL_SCORE=$(echo $MALICIOUS | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('threat_score','error'))")
 MAL_ALERT=$(echo $MALICIOUS | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('alert_triggered','error'))")
-MAL_MS=$(echo $MALICIOUS | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('inference_latency_ms','error'))")
+MAL_MS=$(echo $MALICIOUS | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('latency_ms','error'))")
 
 echo "  Classification:  ${RED}${MAL_CLASS}${RESET}"
 echo "  Threat Score:    ${RED}${MAL_SCORE}${RESET}"
